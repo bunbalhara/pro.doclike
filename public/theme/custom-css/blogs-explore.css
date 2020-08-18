@@ -1,0 +1,78 @@
+.page-content {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+.story .card-header {
+    padding: 15px 20px 2px 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.card-body {
+    padding: 15px;
+}
+.media video, .media img {
+    width: 100%;
+    height: auto;
+}
+.description pre {
+    margin: 2px;
+    padding: 2px;
+}
+.story .card-footer span {
+    margin-left: 20px;
+}
+.comments {
+    padding-left: 5px;
+}
+.comment {
+    margin-top: 10px;
+}
+.comment .card-body pre {
+    margin: 1px;
+    padding: 1px;
+}
+.card-footer {
+    padding: 5px;
+}
+.comment .card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 10px;
+    align-items: baseline;
+}
+.time-ago {
+    padding-right: 10px;
+    color: #8d8d8d;
+}
+.title {
+    font-weight: 400;
+    font-size: 25px;
+    color: #444;
+}
+.user-info img {
+    height: 30px;
+    width: auto;
+}
+body {
+    background-color: #F0F0F0;
+}
+.total-count {
+    color: orange;
+}
+.like-count {
+    color: red;
+}
+.liked .fa-thumbs-up {
+    color: red;
+}
+.auth-name {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.auth-name img {
+    height: 25px;
+    width: auto;
+}

@@ -1,0 +1,83 @@
+.theme-category-row {
+    display: flex;
+    color: black;
+    background: white;
+    border-radius: 1rem;
+}
+.theme-category-row:hover {
+    background: #f4f6f8;
+}
+.theme-category-row.active {
+    background: #299acf;
+    color: white;
+}
+.theme-category-row .category-image {
+    border-radius: 1rem;
+}
+.theme-category-row img {
+    max-width: 75px;
+    max-height: 75px;
+    padding: 8px
+}
+.category-content-row {
+    margin-left: 32px;
+}
+.category-container {
+    overflow-y: scroll;
+}
+
+.create-part-height {
+    height: calc(100vh - 320px);
+}
+/* width */
+.category-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+.category-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px lightgrey; 
+    border-radius: 3px;
+}
+   
+/* Handle */
+.category-container::-webkit-scrollbar-thumb {
+    background: #299acf; 
+    border-radius: 6px;
+}
+.category-content-row {
+    margin-left: 32px;
+}
+/* Handle on hover */
+.category-container::-webkit-scrollbar-thumb:hover {
+    background: lightgray; 
+}
+div#googlemap {
+    min-height: 300px;
+}
+.clear-area {
+    position: absolute;
+    right: 14px;
+    margin-top: -14px;
+}
+.bg-transparent {
+    background: transparent!important;
+}
+.bg-back {
+    background-color: #f4f6f8!important;
+}
+.date-picker {
+    width: 120px;
+}
+.font-large {
+    font-size: 2.4rem;
+}
+.action-btn {
+    cursor: pointer;
+}
+.profile-img {
+    width: 120px;
+    bottom: -60px;
+    left: calc(50% - 60px);
+    border: 2px solid white;
+}

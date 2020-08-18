@@ -1,0 +1,10 @@
+<link rel="icon" href="{{asset('fox/img/favicon.png')}}">
+<link href="{{asset('fox/css/bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{asset('fox/css/slick.css')}}" rel="stylesheet">
+<link href="{{asset('fox/css/slick-theme.css')}}" rel="stylesheet">
+<link href="{{asset('fox/css/aos.css')}}" rel="stylesheet">
+<link href="{{asset('fox/css/lity.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('fox/css/fontawesome-all.min.css')}}">
+<link rel="stylesheet" href="{{asset('fox/css/linearicons.css')}}">
+<link href="{{asset('fox/css/main.css')}}" rel="stylesheet">
+<link href="{{asset('fox/css/color-1.css')}}" rel="stylesheet">

@@ -1,0 +1,107 @@
+#datetimepicker {
+    background: #489fd4;
+    border-radius: 8px;
+    padding: 16px 24px
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+    cursor: pointer;
+    color: rgba(255, 255, 255, .8);
+    padding: 16px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+th.picker-switch:hover {
+    background: transparent!important;
+    color: white!important;
+}
+.next {
+    position: relative;
+}
+ 
+.next:before {
+    content: "\f105";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: rgba(255, 255, 255, .8);
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 16px;
+    left: 0;
+}
+
+th.next:hover, th.prev:hover {
+    background: transparent!important;
+}
+
+th.next:hover::before, th.prev:hover::before {
+    color: white!important;
+}
+
+table.table-condensed {
+    border-spacing: 6px 18px!important;
+    border-collapse: separate;
+    width: 100%;
+    table-layout: fixed
+}
+
+th.dow {
+    color: white;
+    font-weight: 300;
+}
+
+table.table-condense tbody tr td.day {
+    font-weight: 300;
+    color: white;
+    width: 30px!important;
+    max-width: 30px!important;
+}
+
+td.day {
+    height: 35px!important;
+    color: white;
+}
+
+td.day:hover {
+    background: lightcyan!important;
+    color: green!important;
+    border-radius: 8px;
+}
+td.day.active {
+    background: white!important;
+    color: #337ab7!important;
+    border-radius: 8px!important;
+}
+td.today:before {
+    border-bottom-color: white!important
+}
+td.today.active:before {
+    border-bottom-color: #337ab7!important
+}
+.prev {
+    position: relative;
+}
+ 
+.prev:before {
+    content: "\f104";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: rgba(255, 255, 255, .8);
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 16px;
+    right: 0;
+}
+
+span.month, span.year, span.decade {
+    color: white
+}
+
+span.month:hover, span.year:hover, span.decade:hover {
+    color: #337ab7
+}

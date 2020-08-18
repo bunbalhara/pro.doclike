@@ -1,0 +1,10 @@
+<script src="{{asset('fox/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('fox/js/popper.min.js')}}"></script>
+<script src="{{asset('fox/js/bootstrap.min.js')}}"></script>
+<script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+<script src="{{asset('fox/js/slick.min.js')}}"></script>
+<script src="{{asset('fox/js/waypoints.min.js')}}"></script>
+<script src="{{asset('fox/js/jquery.counterup.js')}}"></script>
+<script src="{{asset('fox/js/aos.js')}}"></script>
+<script src="{{asset('fox/js/lity.min.js')}}"></script>
+<script src="{{asset('fox/js/main.js')}}"></script>
