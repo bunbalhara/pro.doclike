@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => env('BROADCAST_DRIVER', 'sync'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,14 @@ return [
         'null' => [
             'driver' => 'null',
         ],
-
+        'sync' => [
+            'driver' => 'sync',
+            'accountSid' => env('TWILIO_ACCOUNT_SID'),
+            'authToken' => env('TWILIO_ACCOUNT_TOKEN'),
+            'serviceSid' => env('TWILIO_SYNC_SERVICE_SID'),
+            'key' => env('TWILIO_SYNC_API_KEY'),
+            'secret' => env('TWILIO_SYNC_API_SECRET')
+        ]
     ],
 
 ];

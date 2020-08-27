@@ -1,6 +1,6 @@
 @if ($appointments->count())
     @if (auth()->user()->user_type == '3')
-        
+
         @foreach($appointments as $k=>$app)
 
             <div class="form-group row" data-id="{{$app->id}}">
@@ -45,10 +45,10 @@
             <tr data-id="{{$app->id}}">
                 <th class="d-flex">
                     <figure class="avatar avatar-md mr-2">
-                        <img src="{{$app->appointment->user->image() }}" class="rounded-circle" alt="image">
+                        <img src="{{$app->appointment->user?$app->appointment->user->image():asset('front/img/user_logo.png') }}" class="rounded-circle" alt="image">
                     </figure>
                     <div class="my-auto">
-                        {{$app->appointment->user->name}}
+                        {{$app->appointment->user->name??''}}
                         <p class="text-muted">{{$app->appointment->category->name}}</p>
                     </div>
                 </th>

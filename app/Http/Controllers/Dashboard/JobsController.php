@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\AppointmentAcceptedByDoctor;
 use App\Http\Controllers\Controller;
 use App\Notifications\JobAccepted;
 use Carbon\Carbon;
@@ -205,40 +206,37 @@ class JobsController extends Controller
             $appointment  = Appointment::with('user')->where('id', $job_id)->first();
             $doctor_data  = User::where('id', $candidate_id)->first();
 
-            $appointment->notify(new JobAccepted());
 
-            if ($appointment->user && $appointment->user->android_token){
-                $lat1 = $appointment->user->latitude;
-                $lon1 = $appointment->user->longitude;
-                $lat2 = $doctor_data->latitude;
-                $lon2 = $doctor_data->longitude;
-                $distance = (($lat1 && $lon1 && $lat2 && $lon2) ? $this->distance($lat1, $lon1, $lat2, $lon2, "K") : 0);
-                $token             = $appointment->user->android_token;
-                $iostoken          = $appointment->user->ios_token;
-                $doctor_name       = $doctor_data->name;
-                $doctor_lat        = $lat2;
-                $doctor_long       = $lon2;
-                $doctor_address    = $doctor_data->address;
-                $doctor_heading    = $doctor_data->heading;
-                $category          = $appointment->category;
-                $job_subcategory   = $appointment->sub_category->name;
-                $author_id         = $appointment->user->id;
-                $cand_map_location = $doctor_data->address;
+            $lat1 = $appointment->latitude;
+            $lon1 = $appointment->longitude;
+            $lat2 = $doctor_data->latitude;
+            $lon2 = $doctor_data->longitude;
+            $distance = (($lat1 && $lon1 && $lat2 && $lon2) ? $this->distance($lat1, $lon1, $lat2, $lon2, "K") : 0);
+            $token             = $appointment->user->android_token??'';
+            $iostoken          = $appointment->user->ios_token??'';
+            $doctor_name       = $doctor_data->name;
+            $doctor_lat        = $lat2;
+            $doctor_long       = $lon2;
+            $doctor_address    = $doctor_data->address;
+            $doctor_heading    = $doctor_data->heading;
+            $category          = $appointment->category;
+            $job_subcategory   = $appointment->sub_category->name;
+            $author_id         = $appointment->user->id??'';
+            $cand_map_location = $doctor_data->address;
 
-                if ($iostoken){
-                    $this->iosNotification($iostoken,$apply_time,$doctor_name,$doctor_lat,$doctor_long,$doctor_address,$doctor_heading,$category,$job_subcategory,$job_id,$author_id,$cand_map_location,$apply_date,$candidate_id,$distance);
-                }
-                if ($token){
-                    $this->notification($token,$apply_time,$doctor_name,$doctor_lat,$doctor_long,$doctor_address,$doctor_heading,$category,$job_subcategory,$job_id,$author_id,$cand_map_location,$apply_date,$candidate_id,$distance);
-                }
+            if ($iostoken){
+                $this->iosNotification($iostoken,$apply_time,$doctor_name,$doctor_lat,$doctor_long,$doctor_address,$doctor_heading,$category,$job_subcategory,$job_id,$author_id,$cand_map_location,$apply_date,$candidate_id,$distance);
+            }
+            if ($token){
+                $this->notification($token,$apply_time,$doctor_name,$doctor_lat,$doctor_long,$doctor_address,$doctor_heading,$category,$job_subcategory,$job_id,$author_id,$cand_map_location,$apply_date,$candidate_id,$distance);
             }
 
             $data = [
                 'appointment_id'       => $job_id,
                 'appointment_shift_id' => $shift_id,
                 'doctor_id'            => $candidate_id,
-                'applied_date'         => $apply_date,
-                'applied_time'         => $apply_time,
+                'applied_date'         => $apply_date??date('Y-m-d'),
+                'applied_time'         => $apply_time??date('Y-m-d'),
                 'status'               => '0',
                 'frontPayment'         => ($request->frontPayment) ? '1' : '0',
                 'paymentValue'         => $request->paymentValue
@@ -248,7 +246,7 @@ class JobsController extends Controller
 
             Notification::create([
                 'senderId'  => $candidate_id,
-                'recieverId' => $appointment->user->id,
+                'recieverId' => $appointment->user->id??'',
                 'message' => 'You appointment is scheduled on '.date('M d' ,strtotime($apply_date)).', '.$apply_time,
                 'type'  => 'appointment',
                 'purposalId' => $purposal->id,
@@ -257,7 +255,12 @@ class JobsController extends Controller
 
             $view = $this->doctorPendingView($apply_date);
 
+            $appointment->notify(new JobAccepted());
+
+            broadcast(new AppointmentAcceptedByDoctor($this->getOffers($appointment->id)));
+
             return response()->json(compact('view'));
+            
         } else if ($action == 'subcategory'){
             $subcategoryData = Categories::where('parent', $request->id)->get();
 
@@ -331,6 +334,16 @@ class JobsController extends Controller
             }
 
             return response()->json(200);
+        }
+    }
+
+    public function getOffers($appointmentId){
+        try{
+            $proposals = AppointmentProposals::where('appointment_id', $appointmentId)->get();
+            $doctors = User::whereIn('id', $proposals->pluck('doctor_id')->toArray())->get();
+            return ['doctors'=>$doctors, 'proposals'=>$proposals];
+        }catch (\Exception $e){
+            return response()->json(json_encode($e->getMessage()));
         }
     }
 

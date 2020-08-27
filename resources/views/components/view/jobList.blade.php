@@ -15,13 +15,13 @@
                 <th scope="row" class="text-center">{{$id + 1}}</th>
                 <th class="d-flex">
                     <figure class="avatar avatar-md mr-2">
-                        <img src="{{$job->user->image() }}" class="rounded-circle" alt="image">
+                        <img src="{{$job->user?$job->user->image():asset('front/img/user_logo.png') }}" class="rounded-circle" alt="image">
                     </figure>
                     <div class="my-auto">
-                        {{$job->user->name}}
+                        {{$job->user->name??''}}
                     </div>
                 </th>
-                <td>{{$job->user->gender}}</td>
+                <td>{{$job->gender}}</td>
                 <td>{{$job->category->name}}</td>
                 <td>{{date('H:i', strtotime($job->appointmentShift->start_time)) }} ~ {{date('H:i',strtotime($job->appointmentShift->end_time)) }}</td>
                 <td class="text-center">
